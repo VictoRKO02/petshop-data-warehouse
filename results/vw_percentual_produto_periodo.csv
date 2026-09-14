@@ -1,0 +1,103 @@
+ano,quadrimestre,banco_origem,nome_produto,valor,percentual
+2024,1,ORACLE,Vermifugo,2894.20,3.57
+2024,1,ORACLE,Racao Premium Gatos,16546.20,20.43
+2024,1,ORACLE,Coleira Nylon,2631.20,3.25
+2024,1,ORACLE,Tapete Higienico Premium,3685.90,4.55
+2024,1,ORACLE,Osso Mastigavel Natural,882.00,1.09
+2024,1,ORACLE,Caixa de Transporte,4477.20,5.53
+2024,1,ORACLE,Racao Premium Caes,19225.20,23.74
+2024,1,ORACLE,Cama Luxo,5696.20,7.03
+2024,1,ORACLE,Bola Borracha,995.00,1.23
+2024,1,ORACLE,Comedouro Inox,1635.90,2.02
+2024,1,ORACLE,Escova para Pelos,302.40,0.37
+2024,1,ORACLE,Antipulgas,4794.00,5.92
+2024,1,ORACLE,Bebedouro Automatico,4556.20,5.63
+2024,1,ORACLE,Corda Mordedor,1618.50,2.00
+2024,1,ORACLE,Shampoo Pet,1465.80,1.81
+2024,1,ORACLE,Petisco Bifinho,2607.50,3.22
+2024,1,ORACLE,Guia Retratil,6985.40,8.62
+2024,2,ORACLE,Tapete Higienico Premium,3865.70,6.53
+2024,2,ORACLE,Caixa de Transporte,2718.30,4.59
+2024,2,ORACLE,Comedouro Inox,718.20,1.21
+2024,2,ORACLE,Racao Premium Caes,15198.30,25.68
+2024,2,ORACLE,Bebedouro Automatico,2398.00,4.05
+2024,2,ORACLE,Petisco Bifinho,1966.80,3.32
+2024,2,ORACLE,Guia Retratil,4283.50,7.24
+2024,2,ORACLE,Vermifugo,2544.90,4.30
+2024,2,ORACLE,Coleira Nylon,2810.60,4.75
+2024,2,ORACLE,Cama Luxo,1499.00,2.53
+2024,2,ORACLE,Shampoo Pet,2024.20,3.42
+2024,2,ORACLE,Escova para Pelos,472.50,0.80
+2024,2,ORACLE,Corda Mordedor,946.20,1.60
+2024,2,ORACLE,Antipulgas,4074.90,6.88
+2024,2,ORACLE,Osso Mastigavel Natural,686.00,1.16
+2024,2,ORACLE,Bola Borracha,636.80,1.08
+2024,2,ORACLE,Racao Premium Gatos,12349.70,20.86
+2024,3,ORACLE,Comedouro Inox,2713.20,2.04
+2024,3,ORACLE,Bebedouro Automatico,2757.70,2.07
+2024,3,ORACLE,Bola Borracha,2089.50,1.57
+2024,3,ORACLE,Tapete Higienico Premium,4854.60,3.64
+2024,3,ORACLE,Caixa de Transporte,7035.60,5.28
+2024,3,ORACLE,Cama Luxo,7495.00,5.62
+2024,3,ORACLE,Osso Mastigavel Natural,1421.00,1.07
+2024,3,ORACLE,Racao Premium Gatos,31893.40,23.94
+2024,3,ORACLE,Antipulgas,9747.80,7.32
+2024,3,ORACLE,Guia Retratil,5008.40,3.76
+2024,3,ORACLE,Shampoo Pet,4920.90,3.69
+2024,3,ORACLE,Escova para Pelos,1455.30,1.09
+2024,3,ORACLE,Corda Mordedor,2440.20,1.83
+2024,3,ORACLE,Petisco Bifinho,3620.70,2.72
+2024,3,ORACLE,Vermifugo,4291.40,3.22
+2024,3,ORACLE,Coleira Nylon,5262.40,3.95
+2024,3,ORACLE,Racao Premium Caes,36242.10,27.20
+2025,1,ORACLE,Escova para Pelos,585.90,0.73
+2025,1,ORACLE,Shampoo Pet,2443.00,3.05
+2025,1,ORACLE,Petisco Bifinho,1877.40,2.34
+2025,1,ORACLE,Bola Borracha,756.20,0.94
+2025,1,ORACLE,Antipulgas,6951.30,8.67
+2025,1,ORACLE,Coleira Nylon,3139.50,3.91
+2025,1,ORACLE,Corda Mordedor,1942.20,2.42
+2025,1,ORACLE,Bebedouro Automatico,4196.50,5.23
+2025,1,ORACLE,Tapete Higienico Premium,4225.30,5.27
+2025,1,ORACLE,Racao Premium Caes,22472.70,28.01
+2025,1,ORACLE,Osso Mastigavel Natural,637.00,0.79
+2025,1,ORACLE,Racao Premium Gatos,17145.70,21.37
+2025,1,ORACLE,Guia Retratil,3229.10,4.03
+2025,1,ORACLE,Cama Luxo,1798.80,2.24
+2025,1,ORACLE,Caixa de Transporte,3997.50,4.98
+2025,1,ORACLE,Vermifugo,3343.30,4.17
+2025,1,ORACLE,Comedouro Inox,1476.30,1.84
+2025,2,ORACLE,Guia Retratil,3229.10,5.89
+2025,2,ORACLE,Osso Mastigavel Natural,514.50,0.94
+2025,2,ORACLE,Bebedouro Automatico,3477.10,6.35
+2025,2,ORACLE,Bola Borracha,696.50,1.27
+2025,2,ORACLE,Shampoo Pet,1849.70,3.38
+2025,2,ORACLE,Petisco Bifinho,1102.60,2.01
+2025,2,ORACLE,Tapete Higienico Premium,2786.90,5.09
+2025,2,ORACLE,Comedouro Inox,957.60,1.75
+2025,2,ORACLE,Vermifugo,2245.50,4.10
+2025,2,ORACLE,Escova para Pelos,699.30,1.28
+2025,2,ORACLE,Coleira Nylon,2033.20,3.71
+2025,2,ORACLE,Cama Luxo,2848.10,5.20
+2025,2,ORACLE,Antipulgas,6152.30,11.23
+2025,2,ORACLE,Racao Premium Gatos,10551.20,19.26
+2025,2,ORACLE,Racao Premium Caes,12730.20,23.24
+2025,2,ORACLE,Caixa de Transporte,1918.80,3.50
+2025,2,ORACLE,Corda Mordedor,996.00,1.82
+2025,3,ORACLE,Vermifugo,5189.60,3.80
+2025,3,ORACLE,Osso Mastigavel Natural,1249.50,0.91
+2025,3,ORACLE,Corda Mordedor,2714.10,1.99
+2025,3,ORACLE,Antipulgas,9747.80,7.13
+2025,3,ORACLE,Racao Premium Caes,45724.80,33.46
+2025,3,ORACLE,Cama Luxo,7944.70,5.81
+2025,3,ORACLE,Guia Retratil,10807.60,7.91
+2025,3,ORACLE,Tapete Higienico Premium,5933.40,4.34
+2025,3,ORACLE,Comedouro Inox,2593.50,1.90
+2025,3,ORACLE,Petisco Bifinho,2771.40,2.03
+2025,3,ORACLE,Bola Borracha,1014.90,0.74
+2025,3,ORACLE,Shampoo Pet,3594.70,2.63
+2025,3,ORACLE,Bebedouro Automatico,1798.50,1.32
+2025,3,ORACLE,Caixa de Transporte,3038.10,2.22
+2025,3,ORACLE,Escova para Pelos,623.70,0.46
+2025,3,ORACLE,Racao Premium Gatos,26138.20,19.13
+2025,3,ORACLE,Coleira Nylon,5770.70,4.22

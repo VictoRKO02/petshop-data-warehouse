@@ -1,0 +1,35 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports: ["5434:5432"]
+    volumes:
+      - ./docker/init:/docker-entrypoint-initdb.d:ro
+      - ./:/projeto:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+  etl:
+    image: python:3.12-slim
+    working_dir: /projeto
+    volumes: ["./:/projeto"]
+    environment:
+      SOURCE_DATABASE_URL: ${SOURCE_DATABASE_URL:-postgresql+psycopg2://pet_user:123456@postgres:5432/petshop_oracle}
+      DW_DATABASE_URL: ${DW_DATABASE_URL:-postgresql+psycopg2://pet_user:123456@postgres:5432/petshop_dw}
+      POSTGRES_SOURCE_DATABASE_URL: ${POSTGRES_SOURCE_DATABASE_URL:-postgresql+psycopg2://pet_user:123456@postgres:5432/petshop_postgres}
+      POSTGRES_NOME_EMPRESA: ${POSTGRES_NOME_EMPRESA:-Pet Shop Nosso Aumigo}
+      POSTGRES_NOME_UNIDADE: ${POSTGRES_NOME_UNIDADE:-Itabuna}
+      POSTGRES_CIDADE: ${POSTGRES_CIDADE:-Itabuna}
+      POSTGRES_ESTADO: ${POSTGRES_ESTADO:-Bahia}
+      POSTGRES_UF: ${POSTGRES_UF:-BA}
+      POSTGRES_REGIAO: ${POSTGRES_REGIAO:-Nordeste}
+    command: >-
+      sh -c "pip install -r requirements.txt &&
+      python config/etl_multifonte.py"
+    depends_on:
+      postgres:
+        condition: service_healthy

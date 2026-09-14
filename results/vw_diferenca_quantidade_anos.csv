@@ -1,0 +1,35 @@
+ano,banco_origem,nome_produto,quantidade,diferenca
+2024,ORACLE,Antipulgas,233,
+2025,ORACLE,Antipulgas,286,53
+2024,ORACLE,Bebedouro Automatico,81,
+2025,ORACLE,Bebedouro Automatico,79,-2
+2024,ORACLE,Bola Borracha,187,
+2025,ORACLE,Bola Borracha,124,-63
+2024,ORACLE,Caixa de Transporte,89,
+2025,ORACLE,Caixa de Transporte,56,-33
+2024,ORACLE,Cama Luxo,98,
+2025,ORACLE,Cama Luxo,84,-14
+2024,ORACLE,Coleira Nylon,358,
+2025,ORACLE,Coleira Nylon,366,8
+2024,ORACLE,Comedouro Inox,127,
+2025,ORACLE,Comedouro Inox,126,-1
+2024,ORACLE,Corda Mordedor,201,
+2025,ORACLE,Corda Mordedor,227,26
+2024,ORACLE,Escova para Pelos,118,
+2025,ORACLE,Escova para Pelos,101,-17
+2024,ORACLE,Guia Retratil,247,
+2025,ORACLE,Guia Retratil,262,15
+2024,ORACLE,Osso Mastigavel Natural,122,
+2025,ORACLE,Osso Mastigavel Natural,98,-24
+2024,ORACLE,Petisco Bifinho,550,
+2025,ORACLE,Petisco Bifinho,386,-164
+2024,ORACLE,Racao Premium Caes,544,
+2025,ORACLE,Racao Premium Caes,623,79
+2024,ORACLE,Racao Premium Gatos,507,
+2025,ORACLE,Racao Premium Gatos,449,-58
+2024,ORACLE,Shampoo Pet,241,
+2025,ORACLE,Shampoo Pet,226,-15
+2024,ORACLE,Tapete Higienico Premium,138,
+2025,ORACLE,Tapete Higienico Premium,144,6
+2024,ORACLE,Vermifugo,195,
+2025,ORACLE,Vermifugo,216,21
