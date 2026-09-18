@@ -1,22 +1,51 @@
+name: petshop-data-warehouse
+
 services:
   postgres:
     image: postgres:16-alpine
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-    ports: ["5432:5432"]
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
     volumes:
+      - postgres_data:/var/lib/postgresql/data
       - ./docker/init:/docker-entrypoint-initdb.d:ro
       - ./:/projeto:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
       interval: 2s
       timeout: 3s
       retries: 20
+    networks:
+      - petshop_network
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@petshop.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      # Pre-cadastra o servidor "Petshop PostgreSQL (Docker)" no primeiro acesso.
+      - ./docker/pgadmin/servers.json:/pgadmin4/servers.json:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - petshop_network
+    restart: unless-stopped
+
   etl:
     image: python:3.12-slim
     working_dir: /projeto
-    volumes: ["./:/projeto"]
+    volumes:
+      - ./:/projeto
     environment:
       SOURCE_DATABASE_URL: ${SOURCE_DATABASE_URL:-postgresql+psycopg2://pet_user:123456@postgres:5432/petshop_oracle}
       DW_DATABASE_URL: ${DW_DATABASE_URL:-postgresql+psycopg2://pet_user:123456@postgres:5432/petshop_dw}
@@ -29,7 +58,19 @@ services:
       POSTGRES_REGIAO: ${POSTGRES_REGIAO:-Nordeste}
     command: >-
       sh -c "pip install -r requirements.txt &&
-      python config/etl_multifonte.py"
+      python config/etl_multifonte.py &&
+      python scripts/aplicar_dw_final.py"
     depends_on:
       postgres:
         condition: service_healthy
+    networks:
+      - petshop_network
+
+networks:
+  petshop_network:
+    name: petshop-data-warehouse-network
+    driver: bridge
+
+volumes:
+  postgres_data:
+  pgadmin_data:

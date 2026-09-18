@@ -15,15 +15,20 @@ docker compose exec -T -e PGPASSWORD=123456 postgres psql \
 DO $$
 DECLARE
     itens BIGINT;
+    unidades BIGINT;
     meses BIGINT;
     total_oracle_origem NUMERIC;
     total_oracle_dw NUMERIC;
     total_dw NUMERIC;
 BEGIN
     SELECT COUNT(*) INTO itens FROM fato_vendas;
+    SELECT COALESCE(SUM(quantidade), 0) INTO unidades FROM fato_vendas;
     SELECT COUNT(*) INTO meses FROM fato_vendas_concorrente;
     IF itens <> 6621 THEN
         RAISE EXCEPTION 'Esperados 6621 itens no DW multifonte, encontrados %', itens;
+    END IF;
+    IF unidades <> 16482 THEN
+        RAISE EXCEPTION 'Esperadas 16482 unidades vendidas no DW multifonte, encontradas %', unidades;
     END IF;
     IF meses <> 24 THEN
         RAISE EXCEPTION 'Esperados 24 meses da concorrente, encontrados %', meses;
@@ -40,7 +45,7 @@ BEGIN
     IF total_oracle_origem <> total_oracle_dw THEN
         RAISE EXCEPTION 'Total Oracle de origem (%) difere do DW (%)', total_oracle_origem, total_oracle_dw;
     END IF;
-    RAISE NOTICE 'OK: % itens multifonte, % meses concorrente, total consolidado R$ %', itens, meses, total_dw;
+    RAISE NOTICE 'OK: % linhas detalhadas, % unidades vendidas, % meses concorrente, total consolidado R$ %', itens, unidades, meses, total_dw;
 END $$;
 SQL
 
