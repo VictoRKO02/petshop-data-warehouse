@@ -362,49 +362,62 @@ def executar(comando, check=True, capturar=False):
 
 
 def preparar_compose_teste():
+    """Garante que docker-compose.test.yml existe e publica o PostgreSQL na porta isolada de teste.
+
+    Em vez de tentar reescrever automaticamente docker-compose.yml (fonte de bugs quando o
+    formato da porta muda, por exemplo ao usar variáveis de ambiente como
+    ${POSTGRES_PORT:-5432}:5432), o repositório já mantém um docker-compose.test.yml versionado
+    e revisado manualmente. Esta função apenas valida que ele existe e que a porta publicada do
+    PostgreSQL corresponde à porta isolada de teste (PORT), corrigindo-a automaticamente caso o
+    arquivo tenha sido editado de forma inconsistente.
+    """
     if not COMPOSE_ORIGINAL.exists():
         raise FileNotFoundError(
             f"Não encontrei {COMPOSE_ORIGINAL}"
         )
 
-    conteudo = COMPOSE_ORIGINAL.read_text(
-        encoding="utf-8"
+    if not COMPOSE_TESTE.exists():
+        raise FileNotFoundError(
+            f"Não encontrei {COMPOSE_TESTE}. "
+            "Este arquivo deve existir no repositório e ser mantido manualmente; "
+            "ele não é mais gerado automaticamente a partir de docker-compose.yml."
+        )
+
+    conteudo = COMPOSE_TESTE.read_text(encoding="utf-8")
+
+    # Regex tolerante: casa qualquer mapeamento externo:5432 do serviço postgres,
+    # com ou sem aspas, com ou sem prefixo de host (ex.: 0.0.0.0:), com porta fixa
+    # (5432, 5433, 5434...) ou baseada em variável de ambiente (${POSTGRES_PORT:-5432}).
+    padrao_porta = re.compile(
+        r'(["\']?)(?:0\.0\.0\.0:)?(?:\$\{[^}]+\}|\d+):5432\1'
     )
 
-    # Troca somente a porta externa do PostgreSQL.
-    # O banco interno continua usando 5432.
-    novo_conteudo, alteracoes = re.subn(
-        r'(["\']?)(?:0\.0\.0\.0:)?5433:5432\1',
-        f'"{PORT}:5432"',
-        conteudo
-    )
+    porta_esperada = f'"{PORT}:5432"'
+
+    if padrao_porta.search(conteudo):
+        novo_conteudo, alteracoes = padrao_porta.subn(porta_esperada, conteudo, count=1)
+    else:
+        novo_conteudo, alteracoes = conteudo, 0
 
     if alteracoes == 0:
-        novo_conteudo, alteracoes = re.subn(
-            r'(["\']?)(?:0\.0\.0\.0:)?5432:5432\1',
-            f'"{PORT}:5432"',
-            conteudo
-        )
-
-    if alteracoes == 0:
+        # Não encontrar o padrão não é fatal: o arquivo de teste pode já ter sido
+        # escrito manualmente em outro formato. Avisamos e seguimos, deixando a
+        # validação de esperar_porta() detectar qualquer incompatibilidade real.
         print(
-            "AVISO: não encontrei automaticamente "
-            "o mapeamento da porta PostgreSQL."
+            "AVISO: não encontrei automaticamente o mapeamento de porta do "
+            f"PostgreSQL em {COMPOSE_TESTE.name}."
         )
         print(
-            "Verifique o docker-compose.yml antes de continuar."
+            f"Confirme manualmente que o serviço postgres publica a porta {PORT} "
+            "antes de prosseguir."
         )
-        sys.exit(1)
-
-    COMPOSE_TESTE.write_text(
-        novo_conteudo,
-        encoding="utf-8"
-    )
-
-    print(
-        f"\nCompose de teste criado: {COMPOSE_TESTE.name}"
-    )
-    print(f"PostgreSQL de teste utilizará porta {PORT}.")
+    elif novo_conteudo != conteudo:
+        COMPOSE_TESTE.write_text(novo_conteudo, encoding="utf-8")
+        print(
+            f"\nCorrigido {COMPOSE_TESTE.name}: PostgreSQL de teste agora publica a porta {PORT}."
+        )
+    else:
+        print(f"\n{COMPOSE_TESTE.name} já está correto (porta {PORT}).")
 
 
 def docker_cmd(*args):

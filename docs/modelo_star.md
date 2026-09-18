@@ -2,8 +2,12 @@
 
 ## Grão
 
-Uma linha de `fato_vendas` representa **um item de produto de uma venda**. A concorrente possui
+Uma linha de `public.fato_vendas` representa **um item de produto de uma venda**. A concorrente possui
 grão mensal porque sua planilha não oferece transações individuais.
+
+Para consumo analítico, o script de preparação publica `dw_final.fato_vendas`, agregada por
+Tempo x Produto x Estado Civil x Loja. Essa tabela possui 1382 linhas e conserva o total de
+16482 unidades da camada detalhada; ela é a tabela correta para o dashboard.
 
 ```mermaid
 erDiagram

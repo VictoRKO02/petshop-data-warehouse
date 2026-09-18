@@ -32,6 +32,8 @@ services:
       - "${PGADMIN_PORT:-5050}:80"
     volumes:
       - pgadmin_data:/var/lib/pgadmin
+      # Pre-cadastra o servidor "Petshop PostgreSQL (Docker)" no primeiro acesso.
+      - ./docker/pgadmin/servers.json:/pgadmin4/servers.json:ro
     depends_on:
       postgres:
         condition: service_healthy
@@ -56,7 +58,8 @@ services:
       POSTGRES_REGIAO: ${POSTGRES_REGIAO:-Nordeste}
     command: >-
       sh -c "pip install -r requirements.txt &&
-      python config/etl_multifonte.py"
+      python config/etl_multifonte.py &&
+      python scripts/aplicar_dw_final.py"
     depends_on:
       postgres:
         condition: service_healthy
